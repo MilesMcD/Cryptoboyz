@@ -5,3 +5,5 @@ Miles: 12/8/17 1:17
 	changed xorBit to xor_bit
 	added print
 	added assert_equals 
+	3:00
+	added hex to ASCII converter. Returns String
