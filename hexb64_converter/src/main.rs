@@ -13,9 +13,9 @@ fn to_base64(hex_string: &str) -> String {
         let first_hex = unwrap_vector(hex_vector.pop());//gets first hex character
         let mut second_hex = unwrap_vector(hex_vector.pop());//gets second hex character
         let third_hex = unwrap_vector(hex_vector.pop());//gets third hex character
-        let second_hex_relevant = second_hex % 4;//mods the second hex character by four to get data in first to binary digits
-        let value_1 = second_hex_relevant * 16 + first_hex;//multiplies the value gotten from the second hex above by 16 to account for place and adds value from second hex
-        second_hex = second_hex - second_hex_relevant;//removes the value used in calculating the first base 64 number from second hex
+        let second_hex_left = second_hex % 4;//mods the second hex character by four to get data in first to binary digits
+        let value_1 = second_hex_left * 16 + first_hex;//multiplies the value gotten from the second hex above by 16 to account for place and adds value from second hex
+        second_hex = second_hex - second_hex_left;//removes the value used in calculating the first base 64 number from second hex
         second_hex = second_hex/4;//divides this by four to account for place ie so 1100 = 11
         let value_2 = third_hex*4 + second_hex;//multiplies the third hex by 4 to account for places and addds leftover value from the second hex
 
@@ -26,9 +26,9 @@ fn to_base64(hex_string: &str) -> String {
 		let first_hex = unwrap_vector(hex_vector.pop()); //grabs the first hex number and converts to integer value
 		if hex_vector.len() > 0{//if there is a second hex value left do this
 			let mut second_hex = unwrap_vector(hex_vector.pop());//gets the second hex value left
-			let second_hex_relevant = second_hex % 4;//takes that hex value mod 4 to get the first to binary digits in the second hex
-			let value_1 = second_hex_relevant * 16 + first_hex;//converts the number gotten to account for place and adds the value of the first hex to get the first base64 number
-			second_hex = second_hex - second_hex_relevant;//removes the value used in the first base 64 number from second_hex
+			let second_hex_left = second_hex % 4;//takes that hex value mod 4 to get the first to binary digits in the second hex
+			let value_1 = second_hex_left * 16 + first_hex;//converts the number gotten to account for place and adds the value of the first hex to get the first base64 number
+			second_hex = second_hex - second_hex_left;//removes the value used in the first base 64 number from second_hex
 			base64.push_front(alphabet[value_1 as usize]);//adds the first base 64 number to the vector base64
             if second_hex>0 {
                 base64.push_front(alphabet[(second_hex/4) as usize]);//creates a second base64 number from the leftover piece from second hex and converts it to account for place
