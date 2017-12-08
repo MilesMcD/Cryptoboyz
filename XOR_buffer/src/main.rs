@@ -7,6 +7,50 @@ assert_eq!(hex_decoder("1c0111001f010100061a024b53535009181c", "6869742074686520
 //println!("{}", hex_to_ascii("68656c6c6f"));
 hex_to_ascii(String::from("68656c6c6f"));
     let mut digrams = xor_decrypter("1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736");
+    println!("{}", digrams);
+}
+
+fn xor_decrypter(str_decrypt: &str) -> String{
+    let mut digrams = digramCounter(str_decrypt);
+    let largest = getLargest(digrams);
+    digrams.remove(largest);
+    let xor_key = hex_decoder(largest, "65");
+    let mut test_hex = "";
+    while test_hex.len() < str_decrypt.len() {
+        test_hex.push_str(xor_key);
+    }
+    let result = hex_decoder(test_hex, str_decrypt);
+    return result;
+}
+
+fn getLargest(hex_count: HashMap<String, i32>) -> String {
+    let mut largest_key =  "";
+    let mut largest_value = 0;
+    for (key, val) in hex_count.iter() {
+        if val > largest_value{
+            largest_key = key;
+            largest_value = val;
+        }
+    }
+    return largest_key;
+
+}
+fn digramCounter(hex_string:&str) -> HashMap<String, i32> {
+    let mut hex_vector = hex_string.chars().collect();
+    let mut hex_digram = HashMap::new();
+    while hex_vector.len() > 0{
+        let hex_1 = hex_vector.pop().unwrap() as char;
+        let hex_2 = hex_vector.pop().unwrap() as char;
+        let hexDouble = hex_1.to_string().push_str(hex_2.to_string());
+        if  hex_digram.contains_key(hexDouble){
+            *hex_digram.entry(hexDouble).or_insert(1) +=1;
+        }
+        else {
+            hex_digram.insert(hexDouble, 1);
+        }
+    }
+    return hex_digram;
+
 }
 
 fn hex_decoder(hex_string_1:&str, hex_string_2:&str) -> String {
@@ -53,7 +97,7 @@ fn unwrap_vector(hex: Option<char>) -> u8 {
 //hex: Vec<char>
 
 
-fn hex_to_ascii(hex_encoded_str: String){
+fn hex_to_ascii(hex_encoded_str: String) -> String{
 	let alphabet: Vec<char> = 
 	" !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz".chars().collect();
 	let mut final_string: String = String::from("");
@@ -71,5 +115,5 @@ fn hex_to_ascii(hex_encoded_str: String){
 	final_string.push(alphabet[decimal_encoded[x]]);
 	}
 	println!("{}", final_string);
-	
+	return final_string
 }
