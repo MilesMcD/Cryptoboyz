@@ -31,7 +31,7 @@ fn to_base64(hex_string: &str) -> String {
 			second_hex = second_hex - second_hex_relevant;//removes the value used in the first base 64 number from second_hex
 			base64.push_front(alphabet[value_1 as usize]);//adds the first base 64 number to the vector base64
             if second_hex>0 {
-                base64.push_front(alphabet[second_hex/4 as usize]);//creates a second base64 number from the leftover piece from second hex and converts it to account for place
+                base64.push_front(alphabet[(second_hex/4) as usize]);//creates a second base64 number from the leftover piece from second hex and converts it to account for place
             }
         }
         else {
