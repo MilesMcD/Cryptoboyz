@@ -1,0 +1,7 @@
+Miles: 12/8/17 1:17
+	added return statement, fixed var name issues
+	changed hex_bit: &u8 to hex_bit: u8 (we need the literal type)
+	changed 2.pow(x) to 2u8.pow(x) (we need the type for inference reasons)
+	changed xorBit to xor_bit
+	added print
+	added assert_equals 
