@@ -1,0 +1,6 @@
+[package]
+name = "XOR_buffer"
+version = "0.1.0"
+authors = ["Erik Hartig <wishfulthinkin16@gmail.com>"]
+
+[dependencies]
