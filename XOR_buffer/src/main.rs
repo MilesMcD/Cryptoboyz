@@ -2,10 +2,16 @@ use std::collections::VecDeque;
 
 fn main() {
 println!("{}", hex_decoder("1c0111001f010100061a024b53535009181c", "686974207468652062756c6c277320657965"));
-assert_eq!(hex_decoder("1c0111001f010100061a024b53535009181c", "686974207468652062756c6c277320657965"),"746865206b696420646f6e277420706c6179")
+assert_eq!(hex_decoder("1c0111001f010100061a024b53535009181c", "686974207468652062756c6c277320657965"),"746865206b696420646f6e277420706c6179");
+
 }
 
 fn hex_decoder(hex_string_1:&str, hex_string_2:&str) -> String {
+	if hex_string_1.len() != hex_string_2.len()
+	{
+				panic!("strings are of differing lengths");
+	}
+
     let mut hex_vector_1: Vec<char> = hex_string_1.chars().collect();
     let mut hex_vector_2: Vec<char> = hex_string_2.chars().collect();
     let mut hex_vector_3 = VecDeque::new();
