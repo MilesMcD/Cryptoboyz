@@ -110,7 +110,7 @@ fn hex_to_ascii(hex_encoded_str: String) -> String{
     }).collect();
 
 	for x in 0..decimal_encoded.len() {
-	final_string.push(alphabet[decimal_encoded[x]]);
+	final_string.push(alphabet[decimal_encoded[x]]); //get error handling in this
 	}
 	println!("{}", final_string);
 	return final_string
